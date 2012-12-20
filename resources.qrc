@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/aletheia/icons">
+        <file>resources/open_book_small.png</file>
+        <file>resources/open_book.png</file>
+    </qresource>
+</RCC>
