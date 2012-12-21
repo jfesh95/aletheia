@@ -2,19 +2,22 @@
 #define BIBLEMANAGER_H
 
 #include <string>
+#include <vector>
 #include <iostream>
-#include "simplesqlite3wrapper.h"
+#include "sqlite3.h"
 
 class BibleManager
 {
 public:
     BibleManager();
     ~BibleManager();
-    std::string getVerse(const std::string & book, int chapter, int verse);
-    std::string getChapter(const std::string &, int);
+    std::vector<std::string> getBookNames();
+    std::string getVerse(const std::string &, const std::string &, const std::string &);
+    std::string getChapter(const std::string &, const std::string &);
 
 private:
-    Sqlite3Db *bibleIndex;
+    std::string lookupVerse(const std::string &, const std::string &, const std::string &);
+    sqlite3 *bibleIndex;
 };
 
 #endif // BIBLEMANAGER_H

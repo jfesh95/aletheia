@@ -2,11 +2,13 @@
 #define BIBLEWINDOW_H
 
 #include "biblemanager.h"
-#include <QWidget>
-#include <QMenu>
-#include <QSignalMapper>
-#include <QAction>
-#include <QString>
+#include "QWidget"
+#include "QMenu"
+#include "QSignalMapper"
+#include "QAction"
+#include "QString"
+#include "QVector"
+#include "QFont"
 
 namespace Ui {
 class BibleWindow;
@@ -22,16 +24,19 @@ public:
 
 private slots:
     void bookChanged(const QString &);
-    void chapterChanged(const int);
+    void chapterChanged(const QString &);
     
 private:
+    int setConfig();
+
     Ui::BibleWindow *ui;
     BibleManager *bibleManager;
-    QSignalMapper *signalMapper;
+    QSignalMapper *bookSignalMapper;
+    QSignalMapper *chapterSignalMapper;
     QMenu *bookMenu;
     QMenu *chapterMenu;
     QString currentBook;
-    int currentChapter;
+    QString currentChapter;
 };
 
 #endif // BIBLEWINDOW_H

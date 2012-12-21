@@ -2,5 +2,10 @@
     <qresource prefix="/aletheia/icons">
         <file>resources/open_book_small.png</file>
         <file>resources/open_book.png</file>
+        <file>resources/close_windows.png</file>
+        <file>resources/windows.png</file>
+        <file>resources/tiled_windows.png</file>
+        <file>resources/horizontal_tiled_windows.png</file>
+        <file>resources/vertical_tiled_windows.png</file>
     </qresource>
 </RCC>
