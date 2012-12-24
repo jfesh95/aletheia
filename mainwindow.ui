@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Aletheia</string>
   </property>
+  <property name="statusTip">
+   <string>Ready</string>
+  </property>
   <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -44,6 +47,10 @@
      <string>Window</string>
     </property>
     <addaction name="actionOpen_Bible"/>
+    <addaction name="separator"/>
+    <addaction name="actionTile_Horizontally"/>
+    <addaction name="actionTile_Vertically"/>
+    <addaction name="actionCascade"/>
     <addaction name="separator"/>
     <addaction name="actionAuto_Tile"/>
     <addaction name="actionClose_All"/>
@@ -89,6 +96,9 @@
    <property name="text">
     <string>Preferences...</string>
    </property>
+   <property name="statusTip">
+    <string>Opens preferences dialog</string>
+   </property>
   </action>
   <action name="actionExit">
    <property name="icon">
@@ -98,6 +108,9 @@
    </property>
    <property name="text">
     <string>E&amp;xit</string>
+   </property>
+   <property name="statusTip">
+    <string>Quits the application</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -112,6 +125,9 @@
    <property name="text">
     <string>Help</string>
    </property>
+   <property name="statusTip">
+    <string>Opens Aletheia's help browser</string>
+   </property>
    <property name="shortcut">
     <string>F1</string>
    </property>
@@ -125,6 +141,9 @@
    <property name="text">
     <string>About Aletheia</string>
    </property>
+   <property name="statusTip">
+    <string>Displays information about Aletheia</string>
+   </property>
   </action>
   <action name="actionOpen_Bible">
    <property name="icon">
@@ -134,6 +153,9 @@
    <property name="text">
     <string>Open Bible</string>
    </property>
+   <property name="statusTip">
+    <string>Opens a new Bible windows</string>
+   </property>
   </action>
   <action name="actionClose_All">
    <property name="icon">
@@ -142,6 +164,9 @@
    </property>
    <property name="text">
     <string>Close All</string>
+   </property>
+   <property name="statusTip">
+    <string>Closes all Bible windows</string>
    </property>
   </action>
   <action name="actionAuto_Tile">
@@ -158,6 +183,9 @@
    <property name="text">
     <string>Auto Tile</string>
    </property>
+   <property name="statusTip">
+    <string>Toggles the auto tiling of Bible windows</string>
+   </property>
   </action>
   <action name="actionCascade">
    <property name="icon">
@@ -170,6 +198,9 @@
    <property name="toolTip">
     <string>Cascade</string>
    </property>
+   <property name="statusTip">
+    <string>Cascades Bible windows</string>
+   </property>
   </action>
   <action name="actionTile_Horizontally">
    <property name="icon">
@@ -179,6 +210,9 @@
    <property name="text">
     <string>Tile Horizontally</string>
    </property>
+   <property name="statusTip">
+    <string>Tiles Bible windows horizontally</string>
+   </property>
   </action>
   <action name="actionTile_Vertically">
    <property name="icon">
@@ -187,6 +221,9 @@
    </property>
    <property name="text">
     <string>Tile Vertically</string>
+   </property>
+   <property name="statusTip">
+    <string>Tiles Bible windows vertically</string>
    </property>
   </action>
  </widget>
@@ -323,6 +360,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionAuto_Tile</sender>
+   <signal>triggered(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>autoTileToggled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>337</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionHelp</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showHelpBrowser()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>337</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showPreferencesDialog()</slot>
@@ -333,5 +402,6 @@
   <slot>cascadeWindows()</slot>
   <slot>tileHorizontally()</slot>
   <slot>tileVertically()</slot>
+  <slot>showHelpBrowser()</slot>
  </slots>
 </ui>

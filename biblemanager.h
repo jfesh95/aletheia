@@ -12,6 +12,7 @@ public:
     BibleManager();
     ~BibleManager();
     std::vector<std::string> getBookNames();
+    std::vector<std::string> getNumberOfChapters(const std::string &);
     std::string getVerse(const std::string &, const std::string &, const std::string &);
     std::string getChapter(const std::string &, const std::string &);
 

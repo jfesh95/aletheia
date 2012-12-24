@@ -3,9 +3,11 @@
 
 #include "QMainWindow"
 #include "QMdiArea"
+#include "QMdiSubWindow"
 #include "QList"
 #include "biblewindow.h"
 #include "aboutdialog.h"
+#include "helpbrowser.h"
 #include "preferencesdialog.h"
 
 namespace Ui {
@@ -23,6 +25,7 @@ public:
 private slots:
     void subWindowClosed();
     void showPreferencesDialog();
+    void showHelpBrowser();
     void showAboutDialog();
     void newBibleWindow();
     void closeAllWindows();

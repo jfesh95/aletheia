@@ -11,6 +11,18 @@ static int bookNamesQueryCallback(void *bookList, int argc, char **argv, char **
     return 0;
 }
 
+static int numOfChaptersQueryCallback(void *chaptersList, int argc, char **argv, char **colName)
+{
+    std::vector<std::string> *cList;
+    cList = (std::vector<std::string>*)chaptersList;
+    cList->reserve(argc);
+
+    for (int i = 0; i < argc; i++)
+        cList->push_back(argv[i]);
+
+    return 0;
+}
+
 static int chapterQueryCallback(void *verseText, int argc, char **argv, char **colName)
 {
     std::string *vText;
@@ -53,6 +65,25 @@ std::vector<std::string> BibleManager::getBookNames()
     }
 
     return bookList;
+}
+
+std::vector<std::string> BibleManager::getNumberOfChapters(const std::string & bookName)
+{
+    int ret;
+    char *errMsg = 0;
+    std::vector<std::string> chaptersList(0);
+    std::string query = "SELECT Chapter FROM Bible WHERE BookName = '";
+    query += bookName + "' AND Verse = 1";
+
+    ret = sqlite3_exec(bibleIndex, query.c_str(), numOfChaptersQueryCallback, &chaptersList, &errMsg);
+
+    if (ret != SQLITE_OK)
+    {
+        std::cerr << "SQL error: " << errMsg << std::endl;
+        sqlite3_free(errMsg);
+    }
+
+    return chaptersList;
 }
 
 std::string BibleManager::lookupVerse(const std::string & book, const std::string & chapter = "", const std::string & verse = "")

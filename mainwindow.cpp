@@ -34,6 +34,12 @@ void MainWindow::showPreferencesDialog()
     pd->show();
 }
 
+void MainWindow::showHelpBrowser()
+{
+    HelpBrowser *hb = new HelpBrowser(this);
+    hb->show();
+}
+
 void MainWindow::showAboutDialog()
 {
     AboutDialog *ad = new AboutDialog(this);
@@ -43,9 +49,9 @@ void MainWindow::showAboutDialog()
 void MainWindow::newBibleWindow()
 {
     BibleWindow *bw = new BibleWindow();
-    bw->setAttribute(Qt::WA_DeleteOnClose);
     connect(bw, SIGNAL(destroyed()), this, SLOT(subWindowClosed()));
-    mdiArea->addSubWindow(bw);
+    mdiArea->addSubWindow(bw, Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint
+                          | Qt::WindowSystemMenuHint | Qt::WindowMaximizeButtonHint);
     bw->show();
     if (autoTile == true)
         mdiArea->tileSubWindows();
@@ -58,9 +64,9 @@ void MainWindow::closeAllWindows()
 
 void MainWindow::autoTileToggled(bool checked)
 {
-    if (checked)
-        mdiArea->tileSubWindows();
     autoTile = checked;
+    if (autoTile == true)
+        mdiArea->tileSubWindows();
 }
 
 void MainWindow::cascadeWindows()
@@ -69,11 +75,6 @@ void MainWindow::cascadeWindows()
 }
 
 void MainWindow::tileHorizontally()
-{
-
-}
-
-void MainWindow::tileVertically()
 {
     QList<QMdiSubWindow*> windows = mdiArea->subWindowList();
     int count = windows.count();
@@ -86,9 +87,27 @@ void MainWindow::tileVertically()
     int y = 0;
     for (int i = 0; i < count; i++)
     {
-        QMdiSubWindow *window = windows.at(i);
-        //->resize(mdiArea->width(), wHeight);
+        windows.at(i)->resize(mdiArea->width(), wHeight);
         windows.at(i)->move(0, y);
         y += wHeight;
+    }
+}
+
+void MainWindow::tileVertically()
+{
+    QList<QMdiSubWindow*> windows = mdiArea->subWindowList();
+    int count = windows.count();
+    if (count < 2)
+    {
+        mdiArea->tileSubWindows();
+        return;
+    }
+    int wWidth = mdiArea->width() / count;
+    int x = 0;
+    for (int i = 0; i < count; i++)
+    {
+        windows.at(i)->resize(wWidth, mdiArea->height());
+        windows.at(i)->move(x, 0);
+        x += wWidth;
     }
 }

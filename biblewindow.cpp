@@ -12,8 +12,7 @@ BibleWindow::BibleWindow(QWidget *parent) :
     bibleManager = new BibleManager();
 
     bookSignalMapper = new QSignalMapper(this);
-
-    bookMenu = new QMenu(this);
+    bookMenu = new MultiColumn // new QMenu(this);
     QVector<std::string> booksList = QVector<std::string>::fromStdVector(bibleManager->getBookNames());
     for (int i = 0; i < booksList.size(); i++)
     {
@@ -27,14 +26,6 @@ BibleWindow::BibleWindow(QWidget *parent) :
 
     chapterSignalMapper = new QSignalMapper(this);
     chapterMenu = new QMenu(this);
-    for (int i = 0; i < 10; i++)
-    {
-        QAction *action = new QAction(QString::number(i+1), this);
-        chapterMenu->addAction(action);
-        connect(action, SIGNAL(triggered()), chapterSignalMapper, SLOT(map()));
-        chapterSignalMapper->setMapping(action, i+1);
-    }
-    connect(chapterSignalMapper, SIGNAL(mapped(const QString &)), this, SLOT(chapterChanged(const QString &)));
     ui->chapterSelector->setMenu(chapterMenu);
 
     bookChanged("Genesis");
@@ -60,6 +51,18 @@ void BibleWindow::bookChanged(const QString & book)
 {
     currentBook = book;
     ui->bookSelector->setText(book);
+
+    chapterMenu->clear();
+    QVector<std::string> chapterList = QVector<std::string>::fromStdVector(bibleManager->getNumberOfChapters(currentBook.toStdString()));
+    for (int i = 0; i < chapterList.size(); i++)
+    {
+        QAction *action = new QAction(QString::fromStdString(chapterList[i]), this);
+        chapterMenu->addAction(action);
+        connect(action, SIGNAL(triggered()), chapterSignalMapper, SLOT(map()));
+        chapterSignalMapper->setMapping(action, QString::fromStdString(chapterList[i]));
+    }
+    connect(chapterSignalMapper, SIGNAL(mapped(const QString &)), this, SLOT(chapterChanged(const QString &)));
+
     chapterChanged("1");
 }
 
