@@ -14,8 +14,7 @@ HEADERS += mainwindow.h \
     biblewindow.h \
     biblemanager.h \
     simplesqlite3wrapper.h \
-    helpbrowser.h \
-    multicolumnmenu.h
+    helpbrowser.h
 FORMS += mainwindow.ui \
     aboutdialog.ui \
     preferencesdialog.ui \
@@ -27,8 +26,7 @@ SOURCES += main.cpp mainwindow.cpp \
     biblewindow.cpp \
     biblemanager.cpp \
     simplesqlite3wrapper.cpp \
-    helpbrowser.cpp \
-    multicolumnmenu.cpp
+    helpbrowser.cpp
 
 RESOURCES += \
     resources.qrc

@@ -9,7 +9,6 @@
 #include "QString"
 #include "QVector"
 #include "QFont"
-#include "mulitcolumnmenu.h"
 
 namespace Ui {
 class BibleWindow;
@@ -34,8 +33,8 @@ private:
     BibleManager *bibleManager;
     QSignalMapper *bookSignalMapper;
     QSignalMapper *chapterSignalMapper;
-    MultiColumnMenu *bookMenu;
-    MultiColumnMenu *chapterMenu;
+    QMenu *bookMenu;
+    QMenu *chapterMenu;
     QString currentBook;
     QString currentChapter;
 };

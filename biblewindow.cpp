@@ -12,7 +12,7 @@ BibleWindow::BibleWindow(QWidget *parent) :
     bibleManager = new BibleManager();
 
     bookSignalMapper = new QSignalMapper(this);
-    bookMenu = new MultiColumn // new QMenu(this);
+    bookMenu = new QMenu(this);
     QVector<std::string> booksList = QVector<std::string>::fromStdVector(bibleManager->getBookNames());
     for (int i = 0; i < booksList.size(); i++)
     {
