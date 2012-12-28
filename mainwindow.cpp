@@ -31,7 +31,13 @@ void MainWindow::subWindowClosed()
 void MainWindow::showPreferencesDialog()
 {
     PreferencesDialog *pd = new PreferencesDialog(this);
-    pd->show();
+    pd->exec();
+    for (int i = 0; i < bibleWindows.length(); i++)
+    {
+        bibleWindows[i]->setTextFont(pd->getFont());
+        bibleWindows[i]->setTextFontColor(pd->getFontColor());
+        bibleWindows[i]->setTextBackgroundColor(pd->getBackgroundColor());
+    }
 }
 
 void MainWindow::showHelpBrowser()
@@ -49,6 +55,7 @@ void MainWindow::showAboutDialog()
 void MainWindow::newBibleWindow()
 {
     BibleWindow *bw = new BibleWindow();
+    bibleWindows.append(bw);
     connect(bw, SIGNAL(destroyed()), this, SLOT(subWindowClosed()));
     mdiArea->addSubWindow(bw, Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint
                           | Qt::WindowSystemMenuHint | Qt::WindowMaximizeButtonHint);

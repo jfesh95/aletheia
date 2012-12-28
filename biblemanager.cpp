@@ -103,6 +103,7 @@ std::string BibleManager::lookupVerse(const std::string & book, const std::strin
     {
         std::cerr << "SQL error: " << errMsg << std::endl;
         sqlite3_free(errMsg);
+        return "Oh no! An error has occured!";
     }
 
     return verseText;

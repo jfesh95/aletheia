@@ -37,6 +37,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QMdiArea *mdiArea;
+    QList<BibleWindow*> bibleWindows;
     bool autoTile;
 };
 

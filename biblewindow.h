@@ -8,7 +8,8 @@
 #include "QAction"
 #include "QString"
 #include "QVector"
-#include "QFont"
+#include <QFont>
+#include <QColor>
 
 namespace Ui {
 class BibleWindow;
@@ -21,6 +22,9 @@ class BibleWindow : public QWidget
 public:
     explicit BibleWindow(QWidget *parent = 0);
     ~BibleWindow();
+    void setTextFont(QFont);
+    void setTextFontColor(QColor);
+    void setTextBackgroundColor(QColor);
 
 private slots:
     void bookChanged(const QString &);
@@ -28,15 +32,21 @@ private slots:
     
 private:
     int setConfig();
+    void setTextViewStyle();
 
     Ui::BibleWindow *ui;
     BibleManager *bibleManager;
     QSignalMapper *bookSignalMapper;
     QSignalMapper *chapterSignalMapper;
     QMenu *bookMenu;
+    QMenu *oldTestamentMenu;
+    QMenu *newTestamentMenu;
     QMenu *chapterMenu;
     QString currentBook;
     QString currentChapter;
+    QFont currentFont;
+    QColor fontColor;
+    QColor backgroundColor;
 };
 
 #endif // BIBLEWINDOW_H

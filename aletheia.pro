@@ -13,8 +13,8 @@ HEADERS += mainwindow.h \
     preferencesdialog.h \
     biblewindow.h \
     biblemanager.h \
-    simplesqlite3wrapper.h \
-    helpbrowser.h
+    helpbrowser.h \
+    colorbutton.h
 FORMS += mainwindow.ui \
     aboutdialog.ui \
     preferencesdialog.ui \
@@ -25,8 +25,8 @@ SOURCES += main.cpp mainwindow.cpp \
     preferencesdialog.cpp \
     biblewindow.cpp \
     biblemanager.cpp \
-    simplesqlite3wrapper.cpp \
-    helpbrowser.cpp
+    helpbrowser.cpp \
+    colorbutton.cpp
 
 RESOURCES += \
     resources.qrc

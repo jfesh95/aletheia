@@ -13,11 +13,17 @@ BibleWindow::BibleWindow(QWidget *parent) :
 
     bookSignalMapper = new QSignalMapper(this);
     bookMenu = new QMenu(this);
+    oldTestamentMenu = bookMenu->addMenu("Old Testament");
+    newTestamentMenu = bookMenu->addMenu("New Testament");
+
     QVector<std::string> booksList = QVector<std::string>::fromStdVector(bibleManager->getBookNames());
     for (int i = 0; i < booksList.size(); i++)
     {
         QAction *action = new QAction(QString::fromStdString(booksList[i]), this);
-        bookMenu->addAction(action);
+        if (i < 39)
+            oldTestamentMenu->addAction(action);
+        else
+            newTestamentMenu->addAction(action);
         connect(action, SIGNAL(triggered()), bookSignalMapper, SLOT(map()));
         bookSignalMapper->setMapping(action, QString::fromStdString(booksList[i]));
     }
@@ -71,4 +77,27 @@ void BibleWindow::chapterChanged(const QString & chapter)
     currentChapter = chapter;
     ui->chapterSelector->setText(currentChapter);
     ui->textView->setText(QString::fromStdString(bibleManager->getChapter(currentBook.toStdString(), currentChapter.toStdString())));
+}
+
+void BibleWindow::setTextViewStyle()
+{
+    ui->textView->setFont(currentFont);
+}
+
+void BibleWindow::setTextFont(QFont font)
+{
+    currentFont = font;
+    setTextViewStyle();
+}
+
+void BibleWindow::setTextFontColor(QColor color)
+{
+    fontColor = color;
+    setTextViewStyle();
+}
+
+void BibleWindow::setTextBackgroundColor(QColor color)
+{
+    backgroundColor = color;
+    setTextViewStyle();
 }

@@ -7,5 +7,6 @@
         <file>resources/tiled_windows.png</file>
         <file>resources/horizontal_tiled_windows.png</file>
         <file>resources/vertical_tiled_windows.png</file>
+        <file>resources/aletheia.png</file>
     </qresource>
 </RCC>

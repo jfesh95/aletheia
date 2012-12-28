@@ -20,7 +20,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../Desktop/aletheia/aletheia.png</pixmap>
+      <pixmap resource="resources.qrc">:/aletheia/icons/resources/aletheia.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -165,7 +165,9 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>pushButton</sender>
