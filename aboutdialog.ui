@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>468</width>
-    <height>293</height>
+    <height>290</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,8 +74,6 @@ Greek &quot;ἀλήθεια&quot; which means &quot;truth&quot;.</string>
         </widget>
        </item>
       </layout>
-      <zorder>label_4</zorder>
-      <zorder>label_5</zorder>
       <zorder>label_4</zorder>
       <zorder>label_5</zorder>
      </widget>
