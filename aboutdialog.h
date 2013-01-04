@@ -15,6 +15,9 @@ public:
     explicit AboutDialog(QWidget *parent = 0);
     ~AboutDialog();
     
+private slots:
+    void licenseButtonToggled(bool checked);
+
 private:
     Ui::AboutDialog *ui;
 };

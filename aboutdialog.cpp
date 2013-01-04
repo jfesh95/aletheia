@@ -12,3 +12,11 @@ AboutDialog::~AboutDialog()
 {
     delete ui;
 }
+
+void AboutDialog::licenseButtonToggled(bool checked)
+{
+    if (checked)
+        ui->stackedWidget->setCurrentIndex(1);
+    else
+        ui->stackedWidget->setCurrentIndex(0);
+}

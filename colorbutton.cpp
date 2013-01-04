@@ -32,6 +32,6 @@ void ColorButton::paintEvent(QPaintEvent *event)
     QRect rect = event->rect();
     QPainter painter( this );
     painter.setBrush( QBrush( currentColor ) );
-    rect.adjust(colorPadding, colorPadding, -colorPadding, -colorPadding);
+    rect.adjust(colorPadding, colorPadding, -1-colorPadding, -1-colorPadding);
     painter.drawRect(rect);
 }
