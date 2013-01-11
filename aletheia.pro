@@ -14,7 +14,8 @@ HEADERS += mainwindow.h \
     biblewindow.h \
     biblemanager.h \
     helpbrowser.h \
-    colorbutton.h
+    colorbutton.h \
+    worksmanager.h
 FORMS += mainwindow.ui \
     aboutdialog.ui \
     preferencesdialog.ui \
@@ -26,7 +27,8 @@ SOURCES += main.cpp mainwindow.cpp \
     biblewindow.cpp \
     biblemanager.cpp \
     helpbrowser.cpp \
-    colorbutton.cpp
+    colorbutton.cpp \
+    worksmanager.cpp
 
 RESOURCES += \
     resources.qrc

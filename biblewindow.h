@@ -7,9 +7,11 @@
 #include "QSignalMapper"
 #include "QAction"
 #include "QString"
+#include <QStringList>
 #include "QVector"
 #include <QFont>
 #include <QColor>
+#include <QUrl>
 
 namespace Ui {
 class BibleWindow;
@@ -28,7 +30,10 @@ public:
 
 private slots:
     void bookChanged(const QString &);
-    void chapterChanged(const QString &);
+    void chapterChanged(int);
+    void chapterChanged(QString);
+    void linkClicked(QUrl);
+    void showCrossReferences(bool);
     
 private:
     int setConfig();
@@ -44,6 +49,7 @@ private:
     QMenu *chapterMenu;
     QString currentBook;
     QString currentChapter;
+    bool _showCrossReferences;
     QFont currentFont;
     QColor fontColor;
     QColor backgroundColor;

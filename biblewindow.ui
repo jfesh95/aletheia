@@ -41,6 +41,23 @@
       </widget>
      </item>
      <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="crossReferenceToggle">
+       <property name="text">
+        <string>Cross-references</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -56,7 +73,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QTextEdit" name="textView">
+    <widget class="QTextBrowser" name="textView">
      <property name="undoRedoEnabled">
       <bool>false</bool>
      </property>
@@ -66,6 +83,12 @@
      <property name="textInteractionFlags">
       <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
      </property>
+     <property name="openExternalLinks">
+      <bool>false</bool>
+     </property>
+     <property name="openLinks">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
   </layout>
@@ -74,9 +97,30 @@
   <tabstop>textView</tabstop>
   <tabstop>bookSelector</tabstop>
   <tabstop>chapterSelector</tabstop>
+  <tabstop>crossReferenceToggle</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>crossReferenceToggle</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>BibleWindow</receiver>
+   <slot>showCrossReferences(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>showCrossReferences(bool)</slot>
+ </slots>
 </ui>

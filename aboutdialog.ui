@@ -90,6 +90,9 @@ Greek &quot;ἀλήθεια&quot; which means &quot;truth&quot;.</string>
          <property name="lineWrapMode">
           <enum>QPlainTextEdit::NoWrap</enum>
          </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
          <property name="plainText">
           <string>Copyright © 2013 James Fesh
 
@@ -163,6 +166,11 @@ IN THE SOFTWARE.</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushButton</tabstop>
+  <tabstop>licenseToggle</tabstop>
+  <tabstop>plainTextEdit</tabstop>
+ </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>

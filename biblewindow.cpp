@@ -1,6 +1,8 @@
 #include "biblewindow.h"
 #include "ui_biblewindow.h"
 
+#include "worksmanager.h"
+
 BibleWindow::BibleWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BibleWindow)
@@ -49,7 +51,8 @@ BibleWindow::~BibleWindow()
 
 int BibleWindow::setConfig()
 {
-    ui->textView->setCurrentFont(QFont("serif", 12));
+    _showCrossReferences = false;
+    ui->textView->setFont(QFont("serif", 12));
     return 0;
 }
 
@@ -67,16 +70,69 @@ void BibleWindow::bookChanged(const QString & book)
         connect(action, SIGNAL(triggered()), chapterSignalMapper, SLOT(map()));
         chapterSignalMapper->setMapping(action, QString::fromStdString(chapterList[i]));
     }
-    connect(chapterSignalMapper, SIGNAL(mapped(const QString &)), this, SLOT(chapterChanged(const QString &)));
+    connect(chapterSignalMapper, SIGNAL(mapped(const QString &)), this, SLOT(chapterChanged(QString)));
 
     chapterChanged("1");
 }
 
-void BibleWindow::chapterChanged(const QString & chapter)
+void BibleWindow::chapterChanged(int chapter)
+{
+    chapterChanged(QString::number(chapter));
+}
+
+void BibleWindow::chapterChanged(QString chapter)
 {
     currentChapter = chapter;
     ui->chapterSelector->setText(currentChapter);
-    ui->textView->setText(QString::fromStdString(bibleManager->getChapter(currentBook.toStdString(), currentChapter.toStdString())));
+
+    QString text = QString::fromStdString(bibleManager->getChapter(currentBook.toStdString(), currentChapter.toStdString())).trimmed();
+    QStringList list = text.split('\n');
+    text.clear();
+
+    for (int i = 0; i < list.length()-1; i++)
+    {
+        QString &verse = list[i];
+        text += verse.replace('<', "&lt;").replace('>', "&gt;").replace('[', "<i>").replace(']', "</i>") + "<br />";
+
+        if (_showCrossReferences)
+        {
+            int index = list[i].indexOf(" ");
+            QStringList refs = QString::fromStdString(WorksManager::getCrossReference(currentBook.toStdString(), currentChapter.toStdString(), list[i].left(index).toStdString())).split('\t');
+            for (int i = 0; i < refs.length(); i++)
+            {
+                text += "<a href=\"" + refs[i] + "\">" + refs[i] + "</a>";
+                if (i+2 == refs.length())
+                    text += "<br />";
+                else text += " ";
+            }
+
+        }
+    }
+    ui->textView->setHtml(text); //.append("<a href=\"previous\">Previous Chapter</a> | <a href=\"next\">Next Chapter</a>"));
+    connect(ui->textView, SIGNAL(anchorClicked(QUrl)), this, SLOT(linkClicked(QUrl)));
+}
+
+void BibleWindow::linkClicked(QUrl url)
+{
+    QString ref = url.toString();
+    if (ref == "next")
+    {
+        // to do
+    }
+    else if (ref == "previous")
+    {
+        // to do
+    }
+    else
+    {
+        // to do
+    }
+}
+
+void BibleWindow::showCrossReferences(bool value)
+{
+    _showCrossReferences = value;
+    chapterChanged(currentChapter);
 }
 
 void BibleWindow::setTextViewStyle()
