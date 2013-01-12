@@ -8,5 +8,11 @@
         <file>resources/horizontal_tiled_windows.png</file>
         <file>resources/vertical_tiled_windows.png</file>
         <file>resources/aletheia.png</file>
+        <file>resources/preferences.png</file>
+        <file>resources/preferences_small.png</file>
+        <file>resources/exit.png</file>
+        <file>resources/help.png</file>
+        <file>resources/aletheia.ico</file>
+        <file>resources/bible_small.png</file>
     </qresource>
 </RCC>

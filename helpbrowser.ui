@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Aletheia Help Browser</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="help-contents" resource="resources.qrc">
+    <normaloff>:/aletheia/icons/resources/help.png</normaloff>:/aletheia/icons/resources/help.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="margin">
     <number>6</number>
@@ -41,7 +45,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

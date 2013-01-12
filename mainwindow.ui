@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Aletheia</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/aletheia/icons/resources/aletheia.ico</normaloff>:/aletheia/icons/resources/aletheia.ico</iconset>
+  </property>
   <property name="statusTip">
    <string>Ready</string>
   </property>
@@ -89,9 +93,8 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionPreferences">
    <property name="icon">
-    <iconset theme="preferences-desktop">
-     <normaloff/>
-    </iconset>
+    <iconset theme="preferences-desktop" resource="resources.qrc">
+     <normaloff>:/aletheia/icons/resources/preferences.png</normaloff>:/aletheia/icons/resources/preferences.png</iconset>
    </property>
    <property name="text">
     <string>Preferences...</string>
@@ -102,9 +105,8 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="application-exit">
-     <normaloff/>
-    </iconset>
+    <iconset theme="application-exit" resource="resources.qrc">
+     <normaloff>:/aletheia/icons/resources/exit.png</normaloff>:/aletheia/icons/resources/exit.png</iconset>
    </property>
    <property name="text">
     <string>E&amp;xit</string>
@@ -118,9 +120,8 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset theme="help-contents">
-     <normaloff/>
-    </iconset>
+    <iconset theme="help-contents" resource="resources.qrc">
+     <normaloff>:/aletheia/icons/resources/help.png</normaloff>:/aletheia/icons/resources/help.png</iconset>
    </property>
    <property name="text">
     <string>Help</string>
@@ -134,9 +135,8 @@
   </action>
   <action name="actionAbout_Aletheia">
    <property name="icon">
-    <iconset theme="help-about">
-     <normaloff/>
-    </iconset>
+    <iconset theme="help-about" resource="resources.qrc">
+     <normaloff>:/aletheia/icons/resources/bible_small.png</normaloff>:/aletheia/icons/resources/bible_small.png</iconset>
    </property>
    <property name="text">
     <string>About Aletheia</string>

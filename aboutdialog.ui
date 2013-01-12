@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>About Aletheia</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="help-about" resource="resources.qrc">
+    <normaloff>:/aletheia/icons/resources/aletheia.ico</normaloff>:/aletheia/icons/resources/aletheia.ico</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>10</number>

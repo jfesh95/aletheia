@@ -5,7 +5,7 @@
 TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
-INCLUDEPATH += .
+INCLUDEPATH += . 'c:/dev/include'
 
 # Input
 HEADERS += mainwindow.h \
@@ -33,4 +33,4 @@ SOURCES += main.cpp mainwindow.cpp \
 RESOURCES += \
     resources.qrc
 
-unix|win32: LIBS += -lsqlite3
+unix|win32: LIBS += -L'c:/dev/lib' -lsqlite3
