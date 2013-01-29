@@ -2,22 +2,19 @@
 #include "ui_preferencesdialog.h"
 #include <QSize>
 
-PreferencesDialog::PreferencesDialog(QWidget *parent) :
+PreferencesDialog::PreferencesDialog(Settings _settings, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PreferencesDialog)
 {
     ui->setupUi(this);
 
-    font.setFamily("serif");
-    font.setPointSize(12);
-    fontColor = Qt::black;
-    backgroundColor = Qt::white;
+    settings = _settings;
 
-    ui->fontFamilyComboBox->setFont(font.family());
-    ui->fontSizeSpinBox->setValue(font.pointSize());
+    ui->fontFamilyComboBox->setCurrentFont(settings.font.family());
+    ui->fontSizeSpinBox->setValue(settings.font.pointSize());
 
-    fontColorButton = new ColorButton(fontColor, this);
-    backgroundColorButton = new ColorButton(backgroundColor, this);
+    fontColorButton = new ColorButton(settings.fontColor, this);
+    backgroundColorButton = new ColorButton(settings.backgroundColor, this);
     ui->fontForm->addRow("Color:", fontColorButton);
     ui->bibleViewForm->addRow("Background color:", backgroundColorButton);
 
@@ -36,46 +33,36 @@ PreferencesDialog::~PreferencesDialog()
 
 void PreferencesDialog::changeFontFamily(QFont family)
 {
-    font.setFamily(family.family());
+    settings.font.setFamily(family.family());
     updateSample();
 }
 
 void PreferencesDialog::changeFontSize(int size)
 {
-    font.setPointSize(size);
+    settings.font.setPointSize(size);
     updateSample();
 }
 
 void PreferencesDialog::changeFontColor(QColor color)
 {
-    fontColor = color;
+    settings.fontColor = color;
     updateSample();
 }
 
 void PreferencesDialog::changeBackgroundColor(QColor color)
 {
-    backgroundColor = color;
+    settings.backgroundColor = color;
     updateSample();
 }
 
 void PreferencesDialog::updateSample()
 {
     QString style = "QLabel {color: %1; background-color: %2;}";
-    ui->sampleText->setStyleSheet(style.arg(fontColor.name(), backgroundColor.name()));
-    ui->sampleText->setFont(font);
+    ui->sampleText->setStyleSheet(style.arg(settings.fontColor.name(), settings.backgroundColor.name()));
+    ui->sampleText->setFont(settings.font);
 }
 
-QFont PreferencesDialog::getFont()
+void PreferencesDialog::on_buttonBox_accepted()
 {
-    return font;
-}
-
-QColor PreferencesDialog::getFontColor()
-{
-    return fontColor;
-}
-
-QColor PreferencesDialog::getBackgroundColor()
-{
-    return backgroundColor;
+    dialogFinished(settings);
 }

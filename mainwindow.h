@@ -9,6 +9,7 @@
 #include "aboutdialog.h"
 #include "helpbrowser.h"
 #include "preferencesdialog.h"
+#include "settings.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,12 +34,14 @@ private slots:
     void autoTileToggled(bool);
     void tileHorizontally();
     void tileVertically();
+    void preferencesDialogFinished(Settings);
 
 private:
     Ui::MainWindow *ui;
     QMdiArea *mdiArea;
     QList<BibleWindow*> bibleWindows;
     bool autoTile;
+    struct Settings settings;
 };
 
 #endif // MAINWINDOW_H

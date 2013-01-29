@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(mdiArea);
 
     autoTile = true;
+    settings.font = QFont("serif", 12);
+    settings.fontColor = Qt::black;
+    settings.backgroundColor = Qt::white;
 
     newBibleWindow();
 }
@@ -30,13 +33,20 @@ void MainWindow::subWindowClosed()
 
 void MainWindow::showPreferencesDialog()
 {
-    PreferencesDialog *pd = new PreferencesDialog(this);
-    pd->exec();
-    for (int i = 0; i < bibleWindows.length(); i++)
+    PreferencesDialog *pd = new PreferencesDialog(settings, this);
+    pd->show();
+    connect(pd, SIGNAL(dialogFinished(struct Settings)), this, SLOT(preferencesDialogFinished(struct Settings)));
+}
+
+void MainWindow::preferencesDialogFinished(struct Settings _settings)
+{
+    settings = _settings;
+    QList<QMdiSubWindow*> windowList = mdiArea->subWindowList();
+    for (int i = 0; i < windowList.length(); i++)
     {
-        bibleWindows[i]->setTextFont(pd->getFont());
-        bibleWindows[i]->setTextFontColor(pd->getFontColor());
-        bibleWindows[i]->setTextBackgroundColor(pd->getBackgroundColor());
+        qobject_cast<BibleWindow*>(windowList[i]->widget())->setTextFont(settings.font);
+        qobject_cast<BibleWindow*>(windowList[i]->widget())->setTextFontColor(settings.fontColor);
+        qobject_cast<BibleWindow*>(windowList[i]->widget())->setTextBackgroundColor(settings.backgroundColor);
     }
 }
 
@@ -54,7 +64,7 @@ void MainWindow::showAboutDialog()
 
 void MainWindow::newBibleWindow()
 {
-    BibleWindow *bw = new BibleWindow();
+    BibleWindow *bw = new BibleWindow(settings);
     bibleWindows.append(bw);
     connect(bw, SIGNAL(destroyed()), this, SLOT(subWindowClosed()));
     mdiArea->addSubWindow(bw, Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint

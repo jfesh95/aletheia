@@ -3,13 +3,13 @@
 
 #include "worksmanager.h"
 
-BibleWindow::BibleWindow(QWidget *parent) :
+BibleWindow::BibleWindow(Settings _settings, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BibleWindow)
 {
     ui->setupUi(this);
 
-    setConfig();
+    setConfig(_settings);
 
     bibleManager = new BibleManager();
 
@@ -37,6 +37,7 @@ BibleWindow::BibleWindow(QWidget *parent) :
     ui->chapterSelector->setMenu(chapterMenu);
 
     bookChanged("Genesis");
+    connect(ui->textView, SIGNAL(anchorClicked(QUrl)), this, SLOT(linkClicked(QUrl)));
 }
 
 BibleWindow::~BibleWindow()
@@ -49,14 +50,25 @@ BibleWindow::~BibleWindow()
     delete ui;
 }
 
-int BibleWindow::setConfig()
+int BibleWindow::setConfig(Settings _settings)
 {
     _showCrossReferences = false;
-    ui->textView->setFont(QFont("serif", 12));
+    ui->textView->setFont(_settings.font);
     return 0;
 }
 
-void BibleWindow::bookChanged(const QString & book)
+void BibleWindow::goToVerse(const QString & book, const QString & chapter, const QString & verse)
+{
+    if (currentBook != book)
+        bookChanged(book, chapter);
+    else if (currentChapter != chapter)
+        chapterChanged(chapter);
+
+    ui->textView->find(verse);
+
+}
+
+void BibleWindow::bookChanged(const QString & book, const QString & chapter)
 {
     currentBook = book;
     ui->bookSelector->setText(book);
@@ -72,7 +84,7 @@ void BibleWindow::bookChanged(const QString & book)
     }
     connect(chapterSignalMapper, SIGNAL(mapped(const QString &)), this, SLOT(chapterChanged(QString)));
 
-    chapterChanged("1");
+    chapterChanged(chapter);
 }
 
 void BibleWindow::chapterChanged(int chapter)
@@ -89,7 +101,7 @@ void BibleWindow::chapterChanged(QString chapter)
     QStringList list = text.split('\n');
     text.clear();
 
-    for (int i = 0; i < list.length()-1; i++)
+    for (int i = 0; i < list.length(); i++)
     {
         QString &verse = list[i];
         text += verse.replace('<', "&lt;").replace('>', "&gt;").replace('[', "<i>").replace(']', "</i>") + "<br />";
@@ -109,7 +121,6 @@ void BibleWindow::chapterChanged(QString chapter)
         }
     }
     ui->textView->setHtml(text); //.append("<a href=\"previous\">Previous Chapter</a> | <a href=\"next\">Next Chapter</a>"));
-    connect(ui->textView, SIGNAL(anchorClicked(QUrl)), this, SLOT(linkClicked(QUrl)));
 }
 
 void BibleWindow::linkClicked(QUrl url)
@@ -125,7 +136,13 @@ void BibleWindow::linkClicked(QUrl url)
     }
     else
     {
-        // to do
+        QStringList temp = ref.split(':');
+        QStringList refParts;
+        int index = temp[0].lastIndexOf(' ');
+        refParts.append(temp[0].left(index));
+        refParts.append(temp[0].right(index));
+        refParts.append(temp[1]);
+        goToVerse(temp[0].left(index), temp[0].mid(index), temp[1]);
     }
 }
 

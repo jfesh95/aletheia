@@ -5,6 +5,7 @@
 #include <QColor>
 #include <QFont>
 #include "colorbutton.h"
+#include "settings.h"
 
 namespace Ui {
 class PreferencesDialog;
@@ -15,11 +16,11 @@ class PreferencesDialog : public QDialog
     Q_OBJECT
     
 public:
-    explicit PreferencesDialog(QWidget *parent = 0);
+    explicit PreferencesDialog(struct Settings _settings, QWidget *parent = 0);
     ~PreferencesDialog();
-    QFont getFont();
-    QColor getFontColor();
-    QColor getBackgroundColor();
+
+signals:
+    void dialogFinished(struct Settings);
 
 public slots:
     void changeFontFamily(QFont);
@@ -27,14 +28,15 @@ public slots:
     void changeFontColor(QColor);
     void changeBackgroundColor(QColor);
     
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     void updateSample();
     Ui::PreferencesDialog *ui;
     ColorButton *fontColorButton;
     ColorButton *backgroundColorButton;
-    QFont font;
-    QColor fontColor;
-    QColor backgroundColor;
+    struct Settings settings;
 };
 
 #endif // PREFERENCESDIALOG_H

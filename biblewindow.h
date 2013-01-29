@@ -2,6 +2,7 @@
 #define BIBLEWINDOW_H
 
 #include "biblemanager.h"
+#include "settings.h"
 #include "QWidget"
 #include "QMenu"
 #include "QSignalMapper"
@@ -22,21 +23,22 @@ class BibleWindow : public QWidget
     Q_OBJECT
     
 public:
-    explicit BibleWindow(QWidget *parent = 0);
+    explicit BibleWindow(struct Settings _settings, QWidget *parent = 0);
     ~BibleWindow();
     void setTextFont(QFont);
     void setTextFontColor(QColor);
     void setTextBackgroundColor(QColor);
 
 private slots:
-    void bookChanged(const QString &);
+    void goToVerse(const QString &, const QString &, const QString &);
+    void bookChanged(const QString &, const QString & chapter = "1");
     void chapterChanged(int);
     void chapterChanged(QString);
     void linkClicked(QUrl);
     void showCrossReferences(bool);
     
 private:
-    int setConfig();
+    int setConfig(struct Settings _settings);
     void setTextViewStyle();
 
     Ui::BibleWindow *ui;

@@ -19,15 +19,27 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="margin">
-    <number>2</number>
+    <number>0</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="margin">
+      <number>1</number>
+     </property>
      <item>
       <widget class="QPushButton" name="bookSelector">
+       <property name="toolTip">
+        <string>Choose a book</string>
+       </property>
+       <property name="statusTip">
+        <string>Choose a book of the Bible</string>
+       </property>
        <property name="text">
         <string>Book</string>
        </property>
@@ -35,6 +47,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="chapterSelector">
+       <property name="toolTip">
+        <string>Choose a chapter</string>
+       </property>
+       <property name="statusTip">
+        <string>Choose a chapter</string>
+       </property>
        <property name="text">
         <string>Chapter</string>
        </property>
@@ -48,12 +66,18 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="crossReferenceToggle">
-       <property name="text">
-        <string>Cross-references</string>
+      <widget class="QCheckBox" name="checkBox">
+       <property name="focusPolicy">
+        <enum>Qt::TabFocus</enum>
        </property>
-       <property name="checkable">
-        <bool>true</bool>
+       <property name="toolTip">
+        <string>Show cross-references</string>
+       </property>
+       <property name="statusTip">
+        <string>Show cross-references</string>
+       </property>
+       <property name="text">
+        <string>Show cross-references</string>
        </property>
       </widget>
      </item>
@@ -97,21 +121,21 @@
   <tabstop>textView</tabstop>
   <tabstop>bookSelector</tabstop>
   <tabstop>chapterSelector</tabstop>
-  <tabstop>crossReferenceToggle</tabstop>
+  <tabstop>checkBox</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
  </resources>
  <connections>
   <connection>
-   <sender>crossReferenceToggle</sender>
+   <sender>checkBox</sender>
    <signal>toggled(bool)</signal>
    <receiver>BibleWindow</receiver>
    <slot>showCrossReferences(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>254</x>
-     <y>16</y>
+     <x>238</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
      <x>247</x>

@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>676</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -50,8 +50,6 @@
     <property name="title">
      <string>Window</string>
     </property>
-    <addaction name="actionOpen_Bible"/>
-    <addaction name="separator"/>
     <addaction name="actionTile_Horizontally"/>
     <addaction name="actionTile_Vertically"/>
     <addaction name="actionCascade"/>
@@ -59,7 +57,14 @@
     <addaction name="actionAuto_Tile"/>
     <addaction name="actionClose_All"/>
    </widget>
+   <widget class="QMenu" name="menuBibles">
+    <property name="title">
+     <string>Bible</string>
+    </property>
+    <addaction name="actionOpen_Bible"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuBibles"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>

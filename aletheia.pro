@@ -6,6 +6,7 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += .
 INCLUDEPATH += . 'c:/dev/include'
+win32: QMAKE_LFLAGS += -static-libgcc
 
 # Input
 HEADERS += mainwindow.h \
@@ -15,7 +16,8 @@ HEADERS += mainwindow.h \
     biblemanager.h \
     helpbrowser.h \
     colorbutton.h \
-    worksmanager.h
+    worksmanager.h \
+    settings.h
 FORMS += mainwindow.ui \
     aboutdialog.ui \
     preferencesdialog.ui \
