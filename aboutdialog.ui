@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>475</width>
+    <width>473</width>
     <height>327</height>
    </rect>
   </property>
@@ -155,7 +155,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</string>
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="closeButton">
        <property name="text">
         <string>Close</string>
        </property>
@@ -166,7 +166,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</string>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pushButton</tabstop>
+  <tabstop>closeButton</tabstop>
   <tabstop>licenseToggle</tabstop>
   <tabstop>plainTextEdit</tabstop>
  </tabstops>
@@ -175,7 +175,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</string>
  </resources>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>closeButton</sender>
    <signal>clicked()</signal>
    <receiver>AboutDialog</receiver>
    <slot>close()</slot>

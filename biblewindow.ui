@@ -98,6 +98,9 @@
    </item>
    <item>
     <widget class="QTextBrowser" name="textView">
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
      <property name="undoRedoEnabled">
       <bool>false</bool>
      </property>
@@ -116,6 +119,21 @@
     </widget>
    </item>
   </layout>
+  <action name="copyAction">
+   <property name="icon">
+    <iconset theme="edit-copy" resource="resources.qrc">
+     <normaloff>:/aletheia/icons/resources/copy.png</normaloff>:/aletheia/icons/resources/copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Copy</string>
+   </property>
+   <property name="statusTip">
+    <string>Copy selected text</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>textView</tabstop>
@@ -143,8 +161,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>copyAction</sender>
+   <signal>triggered()</signal>
+   <receiver>BibleWindow</receiver>
+   <slot>copyText()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>247</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showCrossReferences(bool)</slot>
+  <slot>copyText()</slot>
  </slots>
 </ui>

@@ -1,0 +1,28 @@
+id ICON "resources/aletheia.ico"
+
+1 24 DISCARDABLE "Aletheia.manifest"
+
+1 VERSIONINFO
+FILEVERSION     1,0,0,0
+PRODUCTVERSION  1,0,0,0
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    BEGIN
+      VALUE "CompanyName", "James Fesh"
+      VALUE "FileDescription", "An easy to use Bible program"
+      VALUE "FileVersion", "1.0"
+      VALUE "InternalName", "aletheia"
+      VALUE "LegalCopyright", "Copyright 2013 James Fesh"
+      VALUE "OriginalFilename", "Aletheia.exe"
+      VALUE "ProductName", "Aletheia"
+      VALUE "ProductVersion", "1.0"
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x409, 1252
+  END
+END

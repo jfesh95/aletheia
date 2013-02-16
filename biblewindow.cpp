@@ -2,12 +2,15 @@
 #include "ui_biblewindow.h"
 
 #include "worksmanager.h"
+#include <QPrintDialog>
 
-BibleWindow::BibleWindow(Settings _settings, QWidget *parent) :
+BibleWindow::BibleWindow(Settings _settings, QAction *printAction, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BibleWindow)
 {
     ui->setupUi(this);
+    ui->textView->addAction(ui->copyAction);
+    ui->textView->addAction(printAction);
 
     setConfig(_settings);
 
@@ -173,4 +176,20 @@ void BibleWindow::setTextBackgroundColor(QColor color)
 {
     backgroundColor = color;
     setTextViewStyle();
+}
+
+void BibleWindow::copyText()
+{
+    ui->textView->copy();
+}
+
+void BibleWindow::print(QPrinter *_printer)
+{
+    QPrintDialog *dialog = new QPrintDialog(_printer, this->parentWidget());
+    dialog->setWindowTitle(tr("Print Document"));
+    if (ui->textView->textCursor().hasSelection())
+        dialog->addEnabledOption(QAbstractPrintDialog::PrintSelection);
+    if (dialog->exec() != QDialog::Accepted)
+        return;
+    ui->textView->print(_printer);
 }

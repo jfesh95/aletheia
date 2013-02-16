@@ -14,5 +14,7 @@
         <file>resources/help.png</file>
         <file>resources/aletheia.ico</file>
         <file>resources/bible_small.png</file>
+        <file>resources/printer.png</file>
+        <file>resources/copy.png</file>
     </qresource>
 </RCC>

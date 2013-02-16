@@ -35,11 +35,11 @@ private slots:
     void tileHorizontally();
     void tileVertically();
     void preferencesDialogFinished(Settings);
+    void print();
 
 private:
     Ui::MainWindow *ui;
     QMdiArea *mdiArea;
-    QList<BibleWindow*> bibleWindows;
     bool autoTile;
     struct Settings settings;
 };

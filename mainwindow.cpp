@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QPrinter>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -41,6 +43,8 @@ void MainWindow::showPreferencesDialog()
 void MainWindow::preferencesDialogFinished(struct Settings _settings)
 {
     settings = _settings;
+    QApplication::setStyle(QStyleFactory::create(settings.style));
+
     QList<QMdiSubWindow*> windowList = mdiArea->subWindowList();
     for (int i = 0; i < windowList.length(); i++)
     {
@@ -64,8 +68,7 @@ void MainWindow::showAboutDialog()
 
 void MainWindow::newBibleWindow()
 {
-    BibleWindow *bw = new BibleWindow(settings);
-    bibleWindows.append(bw);
+    BibleWindow *bw = new BibleWindow(settings, ui->actionPrint);
     connect(bw, SIGNAL(destroyed()), this, SLOT(subWindowClosed()));
     mdiArea->addSubWindow(bw, Qt::WindowTitleHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint
                           | Qt::WindowSystemMenuHint | Qt::WindowMaximizeButtonHint);
@@ -127,4 +130,10 @@ void MainWindow::tileVertically()
         windows.at(i)->move(x, 0);
         x += wWidth;
     }
+}
+
+void MainWindow::print()
+{
+    QPrinter printer;
+    qobject_cast<BibleWindow*>(mdiArea->activeSubWindow()->widget())->print(&printer);
 }

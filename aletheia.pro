@@ -3,10 +3,18 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET =
 DEPENDPATH += .
 INCLUDEPATH += . 'c:/dev/include'
-win32: QMAKE_LFLAGS += -static-libgcc
+
+LIBS += -lsqlite3
+
+win32 {
+    QMAKE_CXXFLAGS += -shared
+    QMAKE_LFLAGS += -static
+    LIBS += -L'c:/dev/lib'
+    RC_FILE += resources.rc
+}
 
 # Input
 HEADERS += mainwindow.h \
@@ -35,4 +43,5 @@ SOURCES += main.cpp mainwindow.cpp \
 RESOURCES += \
     resources.qrc
 
-unix|win32: LIBS += -L'c:/dev/lib' -lsqlite3
+OTHER_FILES += \
+    resources.rc

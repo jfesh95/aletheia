@@ -27,7 +27,7 @@
      <x>0</x>
      <y>0</y>
      <width>676</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -35,6 +35,8 @@
      <string>File</string>
     </property>
     <addaction name="actionPreferences"/>
+    <addaction name="separator"/>
+    <addaction name="actionPrint"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -117,7 +119,7 @@
     <string>E&amp;xit</string>
    </property>
    <property name="statusTip">
-    <string>Quits the application</string>
+    <string>Exits the application</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -229,6 +231,24 @@
    </property>
    <property name="statusTip">
     <string>Tiles Bible windows vertically</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="icon">
+    <iconset theme="document-print" resource="resources.qrc">
+     <normaloff>:/aletheia/icons/resources/printer.png</normaloff>:/aletheia/icons/resources/printer.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Print...</string>
+   </property>
+   <property name="toolTip">
+    <string>Print</string>
+   </property>
+   <property name="statusTip">
+    <string>Print out Bible verses</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>
@@ -397,6 +417,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionPrint</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>print()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>337</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showPreferencesDialog()</slot>
@@ -408,5 +444,6 @@
   <slot>tileHorizontally()</slot>
   <slot>tileVertically()</slot>
   <slot>showHelpBrowser()</slot>
+  <slot>print()</slot>
  </slots>
 </ui>

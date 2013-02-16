@@ -30,6 +30,8 @@ public slots:
     
 private slots:
     void on_buttonBox_accepted();
+    void styleChanged(QString style);
+    void on_buttonBox_clicked(QAbstractButton *button);
 
 private:
     void updateSample();

@@ -18,6 +18,10 @@ PreferencesDialog::PreferencesDialog(Settings _settings, QWidget *parent) :
     ui->fontForm->addRow("Color:", fontColorButton);
     ui->bibleViewForm->addRow("Background color:", backgroundColorButton);
 
+    ui->comboBox->addItems(QStyleFactory::keys());
+    ui->comboBox->setCurrentIndex(ui->comboBox->findText(QApplication::style()->objectName(), Qt::MatchContains));
+    connect(ui->comboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(styleChanged(QString)));
+
     connect(ui->fontFamilyComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(changeFontFamily(QFont)));
     connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changeFontSize(int)));
     connect(fontColorButton, SIGNAL(colorChanged(QColor)), this, SLOT(changeFontColor(QColor)));
@@ -62,7 +66,18 @@ void PreferencesDialog::updateSample()
     ui->sampleText->setFont(settings.font);
 }
 
+void PreferencesDialog::styleChanged(QString style)
+{
+    settings.style = style;
+}
+
 void PreferencesDialog::on_buttonBox_accepted()
 {
     dialogFinished(settings);
+}
+
+void PreferencesDialog::on_buttonBox_clicked(QAbstractButton *button)
+{
+    if(button->text().toLower() == "apply")
+        dialogFinished(settings);
 }

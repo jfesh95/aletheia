@@ -10,6 +10,7 @@ struct Settings
     QFont font;
     QColor fontColor;
     QColor backgroundColor;
+    QString style;
 };
 
 #endif // SETTINGS_H

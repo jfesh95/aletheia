@@ -13,6 +13,7 @@
 #include <QFont>
 #include <QColor>
 #include <QUrl>
+#include <QPrinter>
 
 namespace Ui {
 class BibleWindow;
@@ -23,8 +24,9 @@ class BibleWindow : public QWidget
     Q_OBJECT
     
 public:
-    explicit BibleWindow(struct Settings _settings, QWidget *parent = 0);
+    explicit BibleWindow(struct Settings _settings, QAction *printAction, QWidget *parent = 0);
     ~BibleWindow();
+    void print(QPrinter *_printer);
     void setTextFont(QFont);
     void setTextFontColor(QColor);
     void setTextBackgroundColor(QColor);
@@ -36,6 +38,7 @@ private slots:
     void chapterChanged(QString);
     void linkClicked(QUrl);
     void showCrossReferences(bool);
+    void copyText();
     
 private:
     int setConfig(struct Settings _settings);
