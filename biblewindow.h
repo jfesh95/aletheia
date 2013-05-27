@@ -24,24 +24,29 @@ class BibleWindow : public QWidget
     Q_OBJECT
     
 public:
-    explicit BibleWindow(struct Settings _settings, QAction *printAction, QWidget *parent = 0);
+    explicit BibleWindow(const struct Settings & _settings, QAction *printAction, QWidget *parent = 0);
     ~BibleWindow();
     void print(QPrinter *_printer);
     void setTextFont(QFont);
     void setTextFontColor(QColor);
     void setTextBackgroundColor(QColor);
+    void setShowCrossReferences(bool);
+    void changeBook(const QString &, const QString & chapter = "1");
+    void changeChapter(int);
+    void changeChapter(QString);
+    void goToVerse(const QString &, const QString &, const QString &);
+
+public slots:
+    void showCrossReferences(bool);
 
 private slots:
-    void goToVerse(const QString &, const QString &, const QString &);
-    void bookChanged(const QString &, const QString & chapter = "1");
-    void chapterChanged(int);
-    void chapterChanged(QString);
+    void bookChanged(const QString &);
+    void chapterChanged(const QString &);
     void linkClicked(QUrl);
-    void showCrossReferences(bool);
     void copyText();
     
 private:
-    int setConfig(struct Settings _settings);
+    int setConfig(const struct Settings & _settings);
     void setTextViewStyle();
 
     Ui::BibleWindow *ui;

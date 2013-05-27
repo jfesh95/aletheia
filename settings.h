@@ -10,7 +10,9 @@ struct Settings
     QFont font;
     QColor fontColor;
     QColor backgroundColor;
-    QString style;
+
+    // Display settings
+    bool showCrossrefs;
 };
 
 #endif // SETTINGS_H

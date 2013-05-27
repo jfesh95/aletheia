@@ -147,7 +147,7 @@
  <connections>
   <connection>
    <sender>checkBox</sender>
-   <signal>toggled(bool)</signal>
+   <signal>clicked(bool)</signal>
    <receiver>BibleWindow</receiver>
    <slot>showCrossReferences(bool)</slot>
    <hints>

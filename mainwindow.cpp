@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     settings.font = QFont("serif", 12);
     settings.fontColor = Qt::black;
     settings.backgroundColor = Qt::white;
+    settings.showCrossrefs = false;
 
     newBibleWindow();
 }
@@ -43,7 +44,6 @@ void MainWindow::showPreferencesDialog()
 void MainWindow::preferencesDialogFinished(struct Settings _settings)
 {
     settings = _settings;
-    QApplication::setStyle(QStyleFactory::create(settings.style));
 
     QList<QMdiSubWindow*> windowList = mdiArea->subWindowList();
     for (int i = 0; i < windowList.length(); i++)
@@ -51,6 +51,7 @@ void MainWindow::preferencesDialogFinished(struct Settings _settings)
         qobject_cast<BibleWindow*>(windowList[i]->widget())->setTextFont(settings.font);
         qobject_cast<BibleWindow*>(windowList[i]->widget())->setTextFontColor(settings.fontColor);
         qobject_cast<BibleWindow*>(windowList[i]->widget())->setTextBackgroundColor(settings.backgroundColor);
+        qobject_cast<BibleWindow*>(windowList[i]->widget())->setShowCrossReferences(settings.showCrossrefs);
     }
 }
 

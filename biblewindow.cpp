@@ -3,8 +3,9 @@
 
 #include "worksmanager.h"
 #include <QPrintDialog>
+#include <QtGui>
 
-BibleWindow::BibleWindow(Settings _settings, QAction *printAction, QWidget *parent) :
+BibleWindow::BibleWindow(const Settings & _settings, QAction *printAction, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BibleWindow)
 {
@@ -39,7 +40,7 @@ BibleWindow::BibleWindow(Settings _settings, QAction *printAction, QWidget *pare
     chapterMenu = new QMenu(this);
     ui->chapterSelector->setMenu(chapterMenu);
 
-    bookChanged("Genesis");
+    changeBook("Genesis");
     connect(ui->textView, SIGNAL(anchorClicked(QUrl)), this, SLOT(linkClicked(QUrl)));
 }
 
@@ -53,9 +54,10 @@ BibleWindow::~BibleWindow()
     delete ui;
 }
 
-int BibleWindow::setConfig(Settings _settings)
+int BibleWindow::setConfig(const Settings & _settings)
 {
-    _showCrossReferences = false;
+    _showCrossReferences = _settings.showCrossrefs;
+    ui->checkBox->setChecked(_settings.showCrossrefs);
     ui->textView->setFont(_settings.font);
     return 0;
 }
@@ -63,15 +65,22 @@ int BibleWindow::setConfig(Settings _settings)
 void BibleWindow::goToVerse(const QString & book, const QString & chapter, const QString & verse)
 {
     if (currentBook != book)
-        bookChanged(book, chapter);
+        changeBook(book, chapter);
     else if (currentChapter != chapter)
-        chapterChanged(chapter);
+        changeChapter(chapter);
 
     ui->textView->find(verse);
-
+    QTextCursor cursor = ui->textView->textCursor();
+    cursor.select(QTextCursor::LineUnderCursor);
+    ui->textView->setTextCursor(cursor);
 }
 
-void BibleWindow::bookChanged(const QString & book, const QString & chapter)
+void BibleWindow::bookChanged(const QString & book)
+{
+    changeBook(book, "1");
+}
+
+void BibleWindow::changeBook(const QString & book, const QString & chapter)
 {
     currentBook = book;
     ui->bookSelector->setText(book);
@@ -87,15 +96,20 @@ void BibleWindow::bookChanged(const QString & book, const QString & chapter)
     }
     connect(chapterSignalMapper, SIGNAL(mapped(const QString &)), this, SLOT(chapterChanged(QString)));
 
-    chapterChanged(chapter);
+    changeChapter(chapter);
 }
 
-void BibleWindow::chapterChanged(int chapter)
+void BibleWindow::chapterChanged(const QString & chapter)
 {
-    chapterChanged(QString::number(chapter));
+    changeChapter(chapter);
 }
 
-void BibleWindow::chapterChanged(QString chapter)
+void BibleWindow::changeChapter(int chapter)
+{
+    changeChapter(QString::number(chapter));
+}
+
+void BibleWindow::changeChapter(QString chapter)
 {
     currentChapter = chapter;
     ui->chapterSelector->setText(currentChapter);
@@ -123,7 +137,19 @@ void BibleWindow::chapterChanged(QString chapter)
 
         }
     }
-    ui->textView->setHtml(text); //.append("<a href=\"previous\">Previous Chapter</a> | <a href=\"next\">Next Chapter</a>"));
+    text.append("<br />");
+    bool hasPrevious = false;
+    if (currentChapter.toInt() > 1)
+    {
+        hasPrevious = true;
+        text.append("<a href=\"previous\">&lt;- Previous Chapter</a>");
+    }
+    if (currentChapter.toInt() < QString::fromStdString(bibleManager->getNumberOfChapters(currentBook.toStdString()).back()).toInt())
+    {
+        if (hasPrevious) text.append(" &nbsp; | &nbsp; ");
+        text.append("<a href=\"next\">Next Chapter -&gt;</a>");
+    }
+    ui->textView->setHtml(text);
 }
 
 void BibleWindow::linkClicked(QUrl url)
@@ -131,11 +157,11 @@ void BibleWindow::linkClicked(QUrl url)
     QString ref = url.toString();
     if (ref == "next")
     {
-        // to do
+        changeChapter(currentChapter.toInt()+1);
     }
     else if (ref == "previous")
     {
-        // to do
+        changeChapter(currentChapter.toInt()-1);
     }
     else
     {
@@ -151,8 +177,14 @@ void BibleWindow::linkClicked(QUrl url)
 
 void BibleWindow::showCrossReferences(bool value)
 {
+    setShowCrossReferences(value);
+}
+
+void BibleWindow::setShowCrossReferences(bool value)
+{
     _showCrossReferences = value;
-    chapterChanged(currentChapter);
+    ui->checkBox->setChecked(value);
+    changeChapter(currentChapter);
 }
 
 void BibleWindow::setTextViewStyle()

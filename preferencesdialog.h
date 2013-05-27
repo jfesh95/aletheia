@@ -27,10 +27,10 @@ public slots:
     void changeFontSize(int);
     void changeFontColor(QColor);
     void changeBackgroundColor(QColor);
+    void showCrossRefsChanged(bool);
     
 private slots:
     void on_buttonBox_accepted();
-    void styleChanged(QString style);
     void on_buttonBox_clicked(QAbstractButton *button);
 
 private:

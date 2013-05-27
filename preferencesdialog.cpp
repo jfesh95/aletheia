@@ -18,9 +18,7 @@ PreferencesDialog::PreferencesDialog(Settings _settings, QWidget *parent) :
     ui->fontForm->addRow("Color:", fontColorButton);
     ui->bibleViewForm->addRow("Background color:", backgroundColorButton);
 
-    ui->comboBox->addItems(QStyleFactory::keys());
-    ui->comboBox->setCurrentIndex(ui->comboBox->findText(QApplication::style()->objectName(), Qt::MatchContains));
-    connect(ui->comboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(styleChanged(QString)));
+    ui->crossRefeferenceCheck->setChecked(settings.showCrossrefs);
 
     connect(ui->fontFamilyComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(changeFontFamily(QFont)));
     connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changeFontSize(int)));
@@ -66,9 +64,9 @@ void PreferencesDialog::updateSample()
     ui->sampleText->setFont(settings.font);
 }
 
-void PreferencesDialog::styleChanged(QString style)
+void PreferencesDialog::showCrossRefsChanged(bool state)
 {
-    settings.style = style;
+    settings.showCrossrefs = state;
 }
 
 void PreferencesDialog::on_buttonBox_accepted()
