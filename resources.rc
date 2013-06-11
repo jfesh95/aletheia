@@ -11,7 +11,7 @@ BEGIN
     BLOCK "040904E4"
     BEGIN
       VALUE "CompanyName", "James Fesh"
-      VALUE "FileDescription", "An easy to use Bible program"
+      VALUE "FileDescription", "Aletheia Bible program"
       VALUE "FileVersion", "1.0"
       VALUE "InternalName", "aletheia"
       VALUE "LegalCopyright", "Copyright 2013 James Fesh"

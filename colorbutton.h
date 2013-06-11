@@ -1,7 +1,7 @@
 #ifndef COLORBUTTON_H
 #define COLORBUTTON_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 class ColorButton : public QPushButton
 {
