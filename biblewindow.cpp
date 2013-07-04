@@ -129,12 +129,11 @@ void BibleWindow::changeChapter(QString chapter)
             QStringList refs = QString::fromStdString(WorksManager::getCrossReference(currentBook.toStdString(), currentChapter.toStdString(), list[i].left(index).toStdString())).split('\t');
             for (int i = 0; i < refs.length(); i++)
             {
-                text += "<a href=\"" + refs[i] + "\">" + refs[i] + "</a>";
+                text += "<a href=\"" + refs[i].toLatin1() + "\">" + refs[i].toLatin1() + "</a>";
                 if (i+2 == refs.length())
                     text += "<br />";
                 else text += " ";
             }
-
         }
     }
     text.append("<br />");
