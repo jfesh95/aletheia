@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>473</width>
-    <height>327</height>
+    <height>331</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
     <number>10</number>
    </property>
    <item>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="logo">
      <property name="text">
       <string/>
      </property>
@@ -51,7 +51,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="versionLabel">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;version 1.0 alpha&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -61,7 +61,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="aboutLabel">
          <property name="text">
           <string>Aletheia is an easy to use program for both
 reading and studying the Bible.
@@ -78,19 +78,19 @@ Greek &quot;ἀλήθεια&quot; which means &quot;truth&quot;.</string>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_4">
+        <widget class="QLabel" name="verseLabel">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Created by James Fesh&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Sanctify them through thy truth: thy word is truth. &lt;/span&gt;– &lt;span style=&quot; font-style:italic;&quot;&gt;John 17:17&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+         <property name="margin">
+          <number>2</number>
          </property>
         </widget>
        </item>
       </layout>
-      <zorder>label_4</zorder>
-      <zorder>label_5</zorder>
-      <zorder>label</zorder>
+      <zorder>aboutLabel</zorder>
+      <zorder>versionLabel</zorder>
+      <zorder>verseLabel</zorder>
      </widget>
      <widget class="QWidget" name="license">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -101,7 +101,7 @@ Greek &quot;ἀλήθεια&quot; which means &quot;truth&quot;.</string>
         <number>0</number>
        </property>
        <item>
-        <widget class="QPlainTextEdit" name="plainTextEdit">
+        <widget class="QPlainTextEdit" name="licenseText">
          <property name="lineWrapMode">
           <enum>QPlainTextEdit::NoWrap</enum>
          </property>
@@ -168,7 +168,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</string>
  <tabstops>
   <tabstop>closeButton</tabstop>
   <tabstop>licenseToggle</tabstop>
-  <tabstop>plainTextEdit</tabstop>
+  <tabstop>licenseText</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
