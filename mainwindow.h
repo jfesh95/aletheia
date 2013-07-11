@@ -5,6 +5,7 @@
 #include "QMdiArea"
 #include "QMdiSubWindow"
 #include "QList"
+#include <QFontDatabase>
 #include "biblewindow.h"
 #include "aboutdialog.h"
 #include "helpbrowser.h"

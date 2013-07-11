@@ -14,7 +14,13 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(mdiArea);
 
     autoTile = true;
-    settings.font = QFont("serif", 12);
+
+    // Lets try to use the nice Latin Modern Sans font
+    if (QFontDatabase::addApplicationFont("lmsans10-regular.otf") != -1)
+    {
+        QFontDatabase::addApplicationFont("lmsans10-oblique.otf");
+        settings.font = QFont("Latin Modern Sans", 13);
+    } else settings.font = QFont("serif", 13);
     settings.fontColor = Qt::black;
     settings.backgroundColor = Qt::white;
     settings.showCrossrefs = false;
