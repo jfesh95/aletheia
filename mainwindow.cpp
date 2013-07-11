@@ -15,12 +15,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
     autoTile = true;
 
-    // Lets try to use the nice Latin Modern Sans font
-    if (QFontDatabase::addApplicationFont("lmsans10-regular.otf") != -1)
-    {
-        QFontDatabase::addApplicationFont("lmsans10-oblique.otf");
-        settings.font = QFont("Latin Modern Sans", 13);
-    } else settings.font = QFont("serif", 13);
+    // Lest use the best font available
+    QFontDatabase fd;
+    QStringList fonts = fd.families();
+    if (fonts.contains("LM Sans 10", Qt::CaseInsensitive))
+        settings.font = QFont("LM Sans 10", 13);
+    else if (fonts.contains("Candara", Qt::CaseInsensitive))
+        settings.font = QFont("Candara", 13);
+    else if (fonts.contains("Calibri Light", Qt::CaseInsensitive))
+        settings.font = QFont("Calibri Light", 13);
+    else if (fonts.contains("Calibri", Qt::CaseInsensitive))
+        settings.font = QFont("Calibri", 13);
+    else if (fonts.contains("Verdana", Qt::CaseInsensitive))
+        settings.font = QFont("Verdana", 13);
+    else if (fonts.contains("Georgia", Qt::CaseInsensitive))
+        settings.font = QFont("Georgia", 13);
+    else settings.font = QFont("serif");
+    settings.font.setStyleHint(QFont::Serif);
+
     settings.fontColor = Qt::black;
     settings.backgroundColor = Qt::white;
     settings.showCrossrefs = false;
