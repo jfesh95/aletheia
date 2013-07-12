@@ -20,6 +20,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QStringList fonts = fd.families();
     if (fonts.contains("LM Sans 10", Qt::CaseInsensitive))
         settings.font = QFont("LM Sans 10", 13);
+    else if (fonts.contains("Latin Modern Sans", Qt::CaseInsensitive))
+        settings.font = QFont("Latin Modern Sans", 13);
+    else if (fonts.contains("Cantarell", Qt::CaseInsensitive))
+        settings.font = QFont("Cantarell", 13);
+    else if (fonts.contains("Sawasdee", Qt::CaseInsensitive))
+        settings.font = QFont("Sawasdee", 13);
     else if (fonts.contains("Candara", Qt::CaseInsensitive))
         settings.font = QFont("Candara", 13);
     else if (fonts.contains("Calibri Light", Qt::CaseInsensitive))
