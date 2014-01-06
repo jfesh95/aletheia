@@ -26,10 +26,10 @@ MainWindow::MainWindow(QWidget *parent) :
         settings.font = QFont("Cantarell", 13);
     else if (fonts.contains("Sawasdee", Qt::CaseInsensitive))
         settings.font = QFont("Sawasdee", 13);
-    else if (fonts.contains("Candara", Qt::CaseInsensitive))
-        settings.font = QFont("Candara", 13);
     else if (fonts.contains("Calibri Light", Qt::CaseInsensitive))
         settings.font = QFont("Calibri Light", 13);
+    else if (fonts.contains("Candara", Qt::CaseInsensitive))
+        settings.font = QFont("Candara", 13);
     else if (fonts.contains("Calibri", Qt::CaseInsensitive))
         settings.font = QFont("Calibri", 13);
     else if (fonts.contains("Verdana", Qt::CaseInsensitive))
