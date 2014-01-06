@@ -47,7 +47,16 @@
        <property name="spacing">
         <number>20</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -97,7 +106,16 @@ Greek &quot;ἀλήθεια&quot; which means &quot;truth&quot;.</string>
        <property name="spacing">
         <number>0</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -109,7 +127,7 @@ Greek &quot;ἀλήθεια&quot; which means &quot;truth&quot;.</string>
           <bool>true</bool>
          </property>
          <property name="plainText">
-          <string>Copyright © 2013 James Fesh
+          <string>Copyright © 2014 James Fesh
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
