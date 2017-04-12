@@ -1,6 +1,6 @@
 
 TEMPLATE = app
-QT += gui
+QT += gui widgets printsupport
 TARGET = aletheia
 DEPENDPATH += .
 INCLUDEPATH += . 'c:/dev/include' 'c:/dev/Qt/4.8.5/include'
